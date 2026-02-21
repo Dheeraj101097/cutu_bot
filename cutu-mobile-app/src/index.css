@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #1a2822;
+  --color-secondary: #4a675b;
+  --color-accent: #f5deb3;
+  --color-surface-light: #deedcf;
+  --color-background-light: #faf9f6;
+
+  --bg-page: #faf9f6;
+  --bg-card: rgba(255, 255, 255, 0.72);
+  --bg-card-border: rgba(255, 255, 255, 0.6);
+  --text-primary: #1a2822;
+  --text-secondary: #4a675b;
+  --text-accent: #f5deb3;
+}
+
+.dark {
+  --bg-page: #1a2822;
+  --bg-card: rgba(74, 103, 91, 0.18);
+  --bg-card-border: rgba(74, 103, 91, 0.25);
+  --text-primary: #faf9f6;
+  --text-secondary: #deedcf;
+  --text-accent: #f5deb3;
+}
+
+.bg-hero-light {
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(222, 237, 207, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 80% 20%, rgba(245, 222, 179, 0.2) 0%, transparent 50%),
+    var(--color-background-light);
+}
+
+.bg-hero-dark {
+  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(74, 103, 91, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74, 103, 91, 0.25) 0%, transparent 50%),
+    var(--color-primary);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  body {
+    @apply antialiased font-sans;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    overscroll-behavior: none;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-top { padding-top: env(safe-area-inset-top); }
+}

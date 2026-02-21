@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile-first base styles */
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  body {
+    @apply antialiased font-sans text-cutu-text;
+    overscroll-behavior: none;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Safe area padding for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
