@@ -7,35 +7,72 @@
   --color-secondary: #4a675b;
   --color-accent: #f5deb3;
   --color-surface-light: #deedcf;
-  --color-background-light: #faf9f6;
+  --color-background-light: #f8faf9;
 
-  --bg-page: #faf9f6;
-  --bg-card: rgba(255, 255, 255, 0.72);
-  --bg-card-border: rgba(255, 255, 255, 0.6);
+  /* Light: Soft Mint Radial Glow - center 50% 30%, [0% #DEEDCF 30%], [100% #F8FAF9 100%], blur 60px */
+  --bg-radial-light: radial-gradient(
+    ellipse 140% 120% at 50% 30%,
+    rgba(222, 237, 207, 0.3) 0%,
+    rgba(248, 250, 249, 0.5) 50%,
+    #f8faf9 100%
+  );
+
+  /* Glass - light mode */
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(222, 237, 207, 0.4);
+  --glass-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.08);
+
   --text-primary: #1a2822;
   --text-secondary: #4a675b;
   --text-accent: #f5deb3;
 }
 
 .dark {
-  --bg-page: #1a2822;
-  --bg-card: rgba(74, 103, 91, 0.18);
-  --bg-card-border: rgba(74, 103, 91, 0.25);
+  /* Deep Forest Vignette - center 50% 50%, [0% #1A2822], [100% #0D1613], blur 100px */
+  --bg-radial-dark: radial-gradient(
+    ellipse 180% 180% at 50% 50%,
+    #1a2822 0%,
+    #0f1a16 60%,
+    #0d1613 100%
+  );
+
+  /* Glass - dark mode */
+  --glass-bg: rgba(30, 45, 40, 0.5);
+  --glass-border: rgba(74, 103, 91, 0.25);
+  --glass-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 12px 40px -8px rgba(0, 0, 0, 0.4);
+
   --text-primary: #faf9f6;
   --text-secondary: #deedcf;
   --text-accent: #f5deb3;
 }
 
-.bg-hero-light {
-  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(222, 237, 207, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 80% 20%, rgba(245, 222, 179, 0.2) 0%, transparent 50%),
-    var(--color-background-light);
+.bg-app {
+  background: var(--bg-radial-light);
 }
 
-.bg-hero-dark {
-  background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(74, 103, 91, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74, 103, 91, 0.25) 0%, transparent 50%),
-    var(--color-primary);
+.dark .bg-app {
+  background: var(--bg-radial-dark);
+}
+
+.dark .bg-app {
+  background: var(--bg-radial-dark);
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 1.5rem;
 }
 
 @layer base {
@@ -46,7 +83,6 @@
   body {
     @apply antialiased font-sans;
     color: var(--text-primary);
-    background-color: var(--bg-page);
     overscroll-behavior: none;
     min-height: 100dvh;
     min-height: -webkit-fill-available;

@@ -24,21 +24,21 @@ export default function SplashScreen({ onComplete }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-gradient-to-br from-cutu-sky via-white to-cutu-primary-soft/30"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-app"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
-            className="w-24 h-24 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-glass flex items-center justify-center mb-6"
+            className="glass-card w-24 h-24 flex items-center justify-center mb-6"
           >
-            <Bot className="w-12 h-12 text-cutu-primary" strokeWidth={1.5} />
+            <Bot className="w-12 h-12 text-primary" strokeWidth={1.5} />
           </motion.div>
           <motion.h1
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-2xl font-bold font-display text-cutu-text"
+            className="text-2xl font-bold font-display text-[var(--text-primary)]"
           >
             CUTU Bot
           </motion.h1>
@@ -46,7 +46,7 @@ export default function SplashScreen({ onComplete }) {
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.35, duration: 0.4 }}
-            className="text-cutu-text-secondary text-sm mt-1"
+            className="text-[var(--text-secondary)] text-sm mt-1"
           >
             Your smart desktop companion
           </motion.p>

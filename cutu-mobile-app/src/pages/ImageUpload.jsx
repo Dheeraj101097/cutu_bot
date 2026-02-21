@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Image as ImageIcon, Camera, Upload, Send, X } from "lucide-react";
-import GlassCard from "../components/GlassCard";
+import { Image as ImageIcon, Upload, Send, X } from "lucide-react";
 
 export default function ImageUpload() {
   const [preview, setPreview] = useState(null);
@@ -29,21 +28,20 @@ export default function ImageUpload() {
   };
 
   return (
-    <div className="min-h-dvh bg-cutu-bg pb-20">
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 safe-top">
-        <div className="px-4 py-4">
-          <h1 className="text-lg font-semibold font-display text-cutu-text">Images</h1>
-          <p className="text-xs text-cutu-text-secondary mt-0.5">
-            Upload or take photos to send to AI
+    <div className="min-h-dvh bg-app pb-24">
+      <header className="sticky top-0 z-10 glass border-b border-[var(--glass-border)] safe-top">
+        <div className="px-5 py-4">
+          <h1 className="text-lg font-semibold font-display text-[var(--text-primary)]">Upload Image</h1>
+          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            Tap or drag to upload
           </p>
         </div>
       </header>
 
-      <div className="px-4 py-6 space-y-4">
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-          <GlassCard className="overflow-hidden">
-            <label className={preview ? "block aspect-video" : "block min-h-[200px] cursor-pointer"}>
-              <input
+      <div className="px-5 py-6 space-y-6">
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+          <label className="block glass-card overflow-hidden cursor-pointer">
+            <input
                 ref={fileRef}
                 type="file"
                 accept="image/*"
@@ -51,7 +49,7 @@ export default function ImageUpload() {
                 onChange={handleFile}
                 className="hidden"
               />
-              {preview ? (
+            {preview ? (
                 <div className="relative w-full h-full">
                   <img src={preview} alt="Preview" className="w-full h-full object-cover" />
                   <button
@@ -62,41 +60,36 @@ export default function ImageUpload() {
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center min-h-[200px] gap-4 text-cutu-muted">
-                  <div className="w-16 h-16 rounded-2xl bg-cutu-sky/60 flex items-center justify-center">
-                    <ImageIcon size={28} className="text-cutu-primary" />
+                <div className="flex flex-col items-center justify-center min-h-[200px] gap-4 py-8 text-[var(--text-secondary)]">
+                  <div className="w-16 h-16 rounded-card bg-gradient-to-br from-secondary/30 to-accent/30 flex items-center justify-center">
+                    <ImageIcon size={28} className="text-[var(--text-primary)]" />
                   </div>
-                  <p className="text-sm font-medium text-cutu-text">Tap to upload or take a photo</p>
-                  <p className="text-xs text-cutu-text-secondary">Supports JPG, PNG, WebP</p>
-                  <div className="flex gap-3">
-                    <span className="flex items-center gap-1.5 text-xs"><Upload size={14} /> Gallery</span>
-                    <span className="flex items-center gap-1.5 text-xs"><Camera size={14} /> Camera</span>
-                  </div>
+                  <p className="text-sm font-medium text-[var(--text-primary)]">Tap or drag to upload</p>
+                  <p className="text-xs">JPG, PNG, WebP</p>
+                  <span className="flex items-center gap-1.5 text-xs"><Upload size={14} /> Gallery or Camera</span>
                 </div>
               )}
-            </label>
-          </GlassCard>
+          </label>
         </motion.div>
 
         {preview && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-            <GlassCard className="p-4">
-              <p className="text-xs text-cutu-text-secondary mb-3">Ready to send to AI bot</p>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+            <div className="glass-card p-4 space-y-4">
+              <p className="text-xs text-[var(--text-secondary)]">Sample uploaded inner image</p>
+              <div className="rounded-card overflow-hidden aspect-video bg-[var(--glass-bg)]">
+                <img src={preview} alt="Preview" className="w-full h-full object-contain" />
+              </div>
               <button
                 onClick={handleSend}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-cutu-primary to-cutu-accent text-white font-semibold flex items-center justify-center gap-2 active:scale-[0.98]"
+                className="w-full py-3.5 rounded-pill bg-gradient-to-r from-surface-light to-accent text-primary font-semibold flex items-center justify-center gap-2 active:scale-[0.98]"
               >
                 <Send size={18} />
                 Send to Bot
               </button>
-            </GlassCard>
+            </div>
           </motion.div>
         )}
 
-        <GlassCard animate={false} className="p-4">
-          <h3 className="text-sm font-semibold text-cutu-text mb-2">Recent uploads</h3>
-          <p className="text-xs text-cutu-text-secondary">Your sent images will appear here.</p>
-        </GlassCard>
       </div>
     </div>
   );

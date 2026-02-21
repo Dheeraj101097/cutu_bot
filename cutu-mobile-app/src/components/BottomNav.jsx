@@ -13,7 +13,7 @@ const tabs = [
 export default function BottomNav() {
   return (
     <nav className="fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-lg safe-bottom">
-      <div className="rounded-hero bg-[var(--bg-card)] backdrop-blur-[20px] border border-[var(--bg-card-border)] shadow-glass-lg px-2 py-2">
+      <div className="rounded-hero glass px-2 py-2">
         <div className="flex items-center justify-around h-14">
           {tabs.map(({ to, icon: Icon, label }) => (
             <NavLink

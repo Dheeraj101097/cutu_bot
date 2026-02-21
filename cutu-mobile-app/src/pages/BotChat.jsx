@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Image as ImageIcon, Copy, Check, Bot, User } from "lucide-react";
-import GlassCard from "../components/GlassCard";
+import { Send, Image as ImageIcon, Bot, User } from "lucide-react";
 
 const mockMessages = [
   {
@@ -13,7 +12,6 @@ const mockMessages = [
 export default function BotChat() {
   const [messages, setMessages] = useState(mockMessages);
   const [input, setInput] = useState("");
-  const [copiedId, setCopiedId] = useState(null);
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -35,26 +33,20 @@ export default function BotChat() {
     }, 800);
   };
 
-  const copyResponse = (text, id) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
-  };
-
   return (
-    <div className="min-h-dvh bg-cutu-bg flex flex-col pb-20">
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 safe-top">
-        <div className="px-4 py-4">
-          <h1 className="text-lg font-semibold font-display text-cutu-text">
-            Bot Chat
+    <div className="min-h-dvh bg-app flex flex-col pb-24">
+      <header className="sticky top-0 z-10 glass border-b border-[var(--glass-border)] safe-top">
+        <div className="px-5 py-4">
+          <h1 className="text-lg font-semibold font-display text-[var(--text-primary)]">
+            Bot
           </h1>
-          <p className="text-xs text-cutu-text-secondary mt-0.5">
-            Upload or take images, send to AI
+          <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+            Chat with AI
           </p>
         </div>
       </header>
 
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div className="flex-1 overflow-y-auto px-5 py-6 space-y-4">
         <AnimatePresence>
           {messages.map((m, i) => (
             <motion.div
@@ -66,37 +58,34 @@ export default function BotChat() {
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${
                   m.role === "bot"
-                    ? "bg-cutu-primary-soft text-cutu-primary"
-                    : "bg-cutu-accent-pastel text-cutu-accent"
+                    ? "glass"
+                    : "bg-gradient-to-br from-surface-light to-accent"
                 }`}
               >
                 {m.role === "bot" ? (
-                  <Bot size={18} strokeWidth={1.8} />
+                  <Bot size={18} className="text-[var(--text-primary)]" strokeWidth={1.8} />
                 ) : (
-                  <User size={18} strokeWidth={1.8} />
+                  <User size={18} className="text-primary" strokeWidth={1.8} />
                 )}
               </div>
-              <GlassCard animate={false} className={`max-w-[85%] p-3 ${m.role === "user" ? "bg-cutu-primary-soft/60 text-cutu-text" : ""}`}>
-                <p className="text-sm text-cutu-text">{m.text}</p>
-                {m.role === "bot" && (
-                  <button
-                    onClick={() => copyResponse(m.text, i)}
-                    className="mt-2 flex items-center gap-1.5 text-xs text-cutu-muted hover:text-cutu-primary"
-                  >
-                    {copiedId === i ? <Check size={12} /> : <Copy size={12} />}{" "}
-                    {copiedId === i ? "Copied" : "Save response"}
-                  </button>
-                )}
-              </GlassCard>
+              <div
+                className={`max-w-[85%] p-4 rounded-card glass ${
+                  m.role === "user"
+                    ? "bg-gradient-to-br from-surface-light/80 to-accent/60"
+                    : ""
+                }`}
+              >
+                <p className="text-sm text-[var(--text-primary)]">{m.text}</p>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>
         <div ref={bottomRef} />
       </div>
 
-      <div className="fixed bottom-16 left-0 right-0 px-4 pb-2">
-        <div className="bg-white/90 backdrop-blur-xl rounded-2xl border border-slate-200/60 shadow-glass p-2 flex gap-2">
-          <label className="flex items-center justify-center w-10 h-10 rounded-xl bg-cutu-sky/60 text-cutu-primary shrink-0 active:scale-95">
+      <div className="fixed bottom-20 left-0 right-0 px-5 pb-2 z-20">
+        <div className="glass rounded-pill p-2 flex gap-2 items-center max-w-lg mx-auto">
+          <label className="flex items-center justify-center min-h-tap min-w-[44px] rounded-input glass shrink-0 text-[var(--text-primary)] active:scale-95 cursor-pointer">
             <ImageIcon size={20} />
             <input type="file" accept="image/*" className="hidden" />
           </label>
@@ -104,15 +93,15 @@ export default function BotChat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Type a message or upload image..."
-            className="flex-1 bg-transparent outline-none text-cutu-text placeholder:text-cutu-muted text-sm py-2"
+            placeholder="Type a message..."
+            className="flex-1 bg-transparent outline-none text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] placeholder:opacity-70 text-sm py-2 min-w-0"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="w-10 h-10 rounded-xl bg-cutu-primary text-white flex items-center justify-center shrink-0 disabled:opacity-50 active:scale-95"
+            className="min-h-[44px] min-w-[44px] rounded-full bg-gradient-to-br from-surface-light to-accent flex items-center justify-center shrink-0 disabled:opacity-50 active:scale-95 text-primary"
           >
-            <Send size={18} />
+            <Send size={18} strokeWidth={2.5} />
           </button>
         </div>
       </div>

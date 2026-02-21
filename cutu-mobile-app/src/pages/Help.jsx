@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft, HelpCircle } from "lucide-react";
-import GlassCard from "../components/GlassCard";
-
 const sections = [
   { title: "Getting started", desc: "Connect your CUTU Bot device and link your account." },
   { title: "Image to AI", desc: "Upload or capture images and send them to the bot for analysis." },
@@ -11,29 +9,29 @@ const sections = [
 
 export default function Help() {
   return (
-    <div className="min-h-dvh bg-cutu-bg">
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl border-b border-slate-200/60 safe-top">
-        <div className="px-4 py-4 flex items-center gap-3">
-          <Link to="/app/more" className="p-2 -m-2">
-            <ChevronLeft size={20} className="text-cutu-text" />
+    <div className="min-h-dvh bg-app">
+      <header className="sticky top-0 z-10 glass border-b border-[var(--glass-border)] safe-top">
+        <div className="px-5 py-4 flex items-center gap-3">
+          <Link to="/app/profile" className="p-2 -m-2 min-h-tap">
+            <ChevronLeft size={20} className="text-[var(--text-primary)]" />
           </Link>
-          <h1 className="text-lg font-semibold font-display text-cutu-text">
+          <h1 className="text-lg font-semibold font-display text-[var(--text-primary)]">
             Help & Tutorials
           </h1>
         </div>
       </header>
-      <div className="px-4 py-6 space-y-4">
-        <GlassCard animate={false} className="p-6 text-center">
-          <HelpCircle size={40} className="mx-auto text-cutu-primary mb-3" />
-          <p className="text-cutu-text-secondary text-sm">
+      <div className="px-5 py-6 space-y-4">
+        <div className="glass-card p-6 text-center">
+          <HelpCircle size={40} className="mx-auto text-primary mb-3" />
+          <p className="text-[var(--text-secondary)] text-sm">
             Learn how to use CUTU Bot effectively
           </p>
-        </GlassCard>
+        </div>
         {sections.map((s) => (
-          <GlassCard key={s.title} animate={false} className="p-4">
-            <h3 className="font-semibold text-cutu-text text-sm">{s.title}</h3>
-            <p className="text-xs text-cutu-text-secondary mt-1">{s.desc}</p>
-          </GlassCard>
+          <div key={s.title} className="glass-card p-4">
+            <h3 className="font-semibold text-[var(--text-primary)] text-sm">{s.title}</h3>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">{s.desc}</p>
+          </div>
         ))}
       </div>
     </div>

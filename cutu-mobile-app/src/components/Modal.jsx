@@ -22,20 +22,20 @@ export default function Modal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           />
           <motion.div
             initial={{ y: '100%', opacity: 0.8 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: '100%', opacity: 0.8 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-md bg-white/92 backdrop-blur-xl rounded-t-3xl sm:rounded-3xl shadow-glass-lg max-h-[85dvh] overflow-hidden flex flex-col"
+            className="relative w-full max-w-md glass rounded-t-[1.5rem] sm:rounded-card max-h-[85dvh] overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {showClose && (
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 -m-2 rounded-full text-cutu-muted hover:bg-slate-100 active:scale-95 transition-all z-10"
+                className="absolute top-4 right-4 p-2 -m-2 rounded-full text-[var(--text-secondary)] hover:bg-[var(--glass-bg)] active:scale-95 transition-all z-10"
                 aria-label="Close"
               >
                 <X size={20} />
@@ -43,7 +43,7 @@ export default function Modal({
             )}
             {title && (
               <div className="px-6 pt-6 pb-2">
-                <h2 className="text-lg font-semibold text-cutu-text font-display">
+                <h2 className="text-lg font-semibold text-[var(--text-primary)] font-display">
                   {title}
                 </h2>
               </div>
