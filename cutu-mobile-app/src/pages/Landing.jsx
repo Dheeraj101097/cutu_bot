@@ -1,55 +1,51 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Bot, Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function Landing() {
   return (
-    <div className="min-h-dvh bg-app pb-24">
-      <div className="pt-12 pb-8 px-5 safe-top max-w-lg mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-card glass flex items-center justify-center">
-              <Bot className="w-7 h-7 text-primary" strokeWidth={1.5} />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold font-display text-[var(--text-primary)]">
-                CUTU Bot
-              </h1>
-              <p className="text-xs text-[var(--text-secondary)]">
-                Smart desktop companion
-              </p>
-            </div>
-          </div>
+    <div className="min-h-screen bg-app flex flex-col items-center justify-center px-10 pb-20">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120vw] aspect-square bg-emerald-500/10 blur-[150px] rounded-full" />
+      
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 flex flex-col items-center text-center"
+      >
+        <div className="text-8xl font-black text-[--text-primary] tracking-tightest mb-10 drop-shadow-2xl opacity-90">
+          AI
+        </div>
+        
+        <h1 className="text-4xl font-bold text-[--text-primary] tracking-tighter mb-4 leading-none">
+          Next-Gen AI <br /> Experience
+        </h1>
+        
+        <p className="text-sm font-bold text-[--text-secondary] opacity-40 max-w-[240px] leading-relaxed mb-16 tracking-tight">
+          Your intelligent companion for a <br /> seamless digital lifestyle.
+        </p>
+
+        <div className="w-full max-w-xs space-y-4">
+          <Link
+            to="/signup"
+            className="btn-primary w-full py-5 text-base font-bold flex items-center justify-center gap-3 shadow-2xl group"
+          >
+            <span>Get Started</span>
+            <Sparkles size={18} className="group-hover:rotate-12 transition-transform" />
+          </Link>
+          
           <Link
             to="/login"
-            className="px-5 py-2.5 rounded-pill glass text-[var(--text-primary)] text-sm font-medium active:scale-95 transition-transform"
+            className="w-full py-5 glass rounded-3xl text-sm font-bold text-[--text-primary] border-white/10 flex items-center justify-center gap-2 hover:bg-white/5 active:scale-95 transition-all shadow-xl"
           >
-            Login
+            Sign In
+            <ArrowRight size={16} className="opacity-40" />
           </Link>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.1 }}
-          className="text-[var(--text-secondary)] text-center text-sm mt-8 px-2"
-        >
-          Your AI-powered assistant for images, stocks, music and more
-        </motion.p>
-      </div>
-
-      <div className="fixed bottom-0 left-0 right-0 p-5 safe-bottom">
-        <Link
-          to="/signup"
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-pill bg-gradient-to-r from-surface-light to-accent text-primary font-semibold active:scale-[0.98] transition-transform"
-        >
-          <Sparkles size={18} />
-          Get started
-        </Link>
+      <div className="fixed bottom-12 text-[10px] font-black tracking-[0.4em] uppercase opacity-20 text-[--text-secondary]">
+        Vroom ambient occlusion
       </div>
     </div>
   );

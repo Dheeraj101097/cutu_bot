@@ -3,24 +3,21 @@ import { motion } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import {
   MessageCircle,
-  Image,
+  Upload,
   TrendingUp,
   Music,
-  Bell,
-  History,
-  Sparkles,
   Settings,
   Sun,
   Moon,
+  Bot,
 } from "lucide-react";
 
 const features = [
-  { icon: MessageCircle, title: "Bot", desc: "AI chat", to: "/app/bot" },
-  { icon: Image, title: "Upload Image", desc: "Send to AI", to: "/app/images" },
-  { icon: TrendingUp, title: "Stocks", desc: "Live quotes", to: "/app/stocks" },
-  { icon: Music, title: "Music", desc: "Playlists", to: "/app/music" },
-  { icon: Bell, title: "Notifications", desc: "Alerts", to: "/app/notifications" },
-  { icon: Settings, title: "Settings", desc: "Preferences", to: "/app/profile" },
+  { icon: Bot, title: "Bot", to: "/app/bot", glow: "bg-emerald-400" },
+  { icon: Upload, title: "Upload Image", to: "/app/images", glow: "bg-orange-400" },
+  { icon: TrendingUp, title: "Stocks", to: "/app/stocks", glow: "bg-blue-400" },
+  { icon: Music, title: "Music", to: "/app/music", glow: "bg-purple-400" },
+  { icon: Settings, title: "Settings", to: "/app/profile", glow: "bg-gray-400" },
 ];
 
 export default function Home() {
@@ -28,59 +25,51 @@ export default function Home() {
   const { dark, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-dvh pb-28 bg-app">
-      <header className="px-5 pt-12 pb-6 safe-top max-w-lg mx-auto">
-        <div className="flex items-start justify-between gap-4">
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex flex-col min-w-0"
-          >
-            <h1 className="text-xl font-bold font-display text-[var(--text-primary)]">
-              Hi Dheeraj,
-            </h1>
-            <p className="text-[var(--text-secondary)] text-base mt-1">
-              What would you like to do?
-            </p>
-          </motion.div>
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="shrink-0 min-h-tap min-w-[44px] rounded-input glass flex items-center justify-center text-[var(--text-primary)] active:scale-95 transition-transform"
-          >
-            {dark ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
-        </div>
+    <div className="min-h-screen pb-32">
+      <header className="px-6 pt-16 pb-12 max-w-lg mx-auto flex justify-between items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-2"
+        >
+          <h1 className="text-3xl font-bold text-[--text-primary] tracking-tight leading-none">
+            Hi Dheeraj,
+          </h1>
+          <p className="text-[--text-primary] text-2xl font-bold opacity-40 leading-tight">
+            What would you like to <br /> do?
+          </p>
+        </motion.div>
+        
+        <button
+          onClick={toggleTheme}
+          className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-[--text-primary] shadow-inner active:scale-95 transition-all"
+        >
+          {dark ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
       </header>
 
-      <div className="px-5 max-w-lg mx-auto">
-        <div className="grid grid-cols-2 gap-4">
+      <div className="px-6 max-w-lg mx-auto">
+        <div className="grid grid-cols-2 gap-6">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.04, duration: 0.25 }}
-              className="aspect-[1.1]"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
             >
               <button
                 onClick={() => navigate(f.to)}
-                className="w-full h-full p-4 flex flex-col items-start justify-between glass-card active:scale-[0.98] transition-transform duration-200 text-left"
+                className="w-full aspect-square glass-card p-6 flex flex-col items-center justify-center text-center gap-5 active:scale-95 transition-all group relative overflow-hidden shadow-2xl"
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-secondary to-accent text-primary"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  <f.icon size={22} strokeWidth={2} />
+                <div className="relative">
+                  <div className={`absolute inset-0 ${f.glow} opacity-20 blur-2xl scale-150 rounded-full group-hover:opacity-40 transition-opacity`} />
+                  <div className="w-16 h-16 rounded-2xl glass border-white/20 flex items-center justify-center shadow-inner relative z-10 group-hover:-translate-y-1 transition-transform">
+                    <f.icon size={28} className="text-[--text-primary]" strokeWidth={2.5} />
+                  </div>
                 </div>
-                <div className="min-w-0 w-full">
-                  <h3 className="font-semibold text-[var(--text-primary)] text-sm truncate">
-                    {f.title}
-                  </h3>
-                  <p className="text-xs text-[var(--text-secondary)] mt-0.5 truncate">
-                    {f.desc}
-                  </p>
-                </div>
+                <h3 className="font-bold text-[--text-primary] text-sm tracking-tight relative z-10">
+                  {f.title}
+                </h3>
               </button>
             </motion.div>
           ))}

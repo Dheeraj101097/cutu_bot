@@ -16,12 +16,12 @@ export default {
         display: ["Outfit", "system-ui", "sans-serif"],
       },
       borderRadius: {
-        sm: "12px",
-        card: "20px",
-        "card-lg": "24px",
-        hero: "28px",
+        sm: "0.75rem",
+        card: "1.25rem",
+        "card-lg": "1.5rem",
+        hero: "1.75rem",
         pill: "9999px",
-        input: "16px",
+        input: "1rem",
       },
       boxShadow: {
         glass: "0 4px 24px -1px rgba(0,0,0,0.06), 0 2px 8px -2px rgba(0,0,0,0.04)",
