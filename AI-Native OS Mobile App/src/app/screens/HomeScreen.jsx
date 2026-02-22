@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { GlassCard } from '../components/GlassCard';
-import { MessageSquare, Upload, TrendingUp, Music, Home, Search, Bell, User } from 'lucide-react';
+import { MessageSquare, Upload, TrendingUp, Music, Home, Plus, Search, Bell, User } from 'lucide-react';
 
 export function HomeScreen() {
   const navigate = useNavigate();
@@ -15,10 +15,11 @@ export function HomeScreen() {
 
   const navItems = [
     { icon: Home, active: true },
-    { icon: Search, active: false },
+    { icon: Plus, active: false },
     { icon: Bell, active: false },
     { icon: User, active: false },
   ];
+  
 
   return (
     <div className="screen-container">

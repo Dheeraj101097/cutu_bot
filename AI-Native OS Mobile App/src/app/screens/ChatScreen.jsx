@@ -1,79 +1,132 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GlassCard } from '../components/GlassCard';
-import { ArrowLeft, Send } from 'lucide-react';
+import { ArrowLeft, Send, Sparkles } from 'lucide-react';
 
 export function ChatScreen() {
   const navigate = useNavigate();
-  // Removed the <Message[]> type annotation
+  const scrollRef = useRef(null);
   const [messages, setMessages] = useState([
-    { id: 1, text: 'Hello! How can I assist you today?', sender: 'bot' },
-    { id: 2, text: 'Tell me about the weather', sender: 'user' },
-    { id: 3, text: 'The weather today is sunny with a temperature of 72°F. Perfect for outdoor activities!', sender: 'bot' },
+    { id: 1, text: 'Hello message us are unknoevijcoum messagis your accounts, oenestfiir and mece?', sender: 'bot' },
+    { id: 2, text: 'Hello, soon mm\'s next message?', sender: 'user' },
+    { id: 3, text: 'Hello message as can markete a mehily accent bulbiers.', sender: 'bot' },
+    { id: 4, text: 'Hello, sun me nnxt mene!', sender: 'user' },
   ]);
   const [input, setInput] = useState('');
 
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   const handleSend = () => {
     if (input.trim()) {
-      setMessages([...messages, { id: Date.now(), text: input, sender: 'user' }]);
+      const newUserMsg = { id: Date.now(), text: input, sender: 'user' };
+      setMessages([...messages, newUserMsg]);
       setInput('');
       
       // Simulate bot response
       setTimeout(() => {
         setMessages(prev => [
           ...prev,
-          { id: Date.now(), text: 'I understand. Let me help you with that!', sender: 'bot' }
+          { id: Date.now() + 1, text: 'I understand. Let me help you with that!', sender: 'bot' }
         ]);
       }, 1000);
     }
   };
 
+  const bubbleVariants = {
+    initial: { scale: 0.8, opacity: 0, y: 20 },
+    animate: { 
+      scale: 1, 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 260, 
+        damping: 20 
+      }
+    },
+    float: {
+      y: [0, -5, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
-    <div className="screen-container">
+    <div className="screen-container overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="fixed top-0 left-0 right-0 z-10 px-6 pt-8 pb-4 backdrop-blur-xl">
+      <div className="fixed top-0 left-0 right-0 z-20 px-6 pt-8 pb-4 backdrop-blur-xl">
         <div className="flex items-center space-x-4">
           <button onClick={() => navigate('/home')} className="nav-icon">
             <ArrowLeft className="w-6 h-6" />
           </button>
-          <h1 className="text-2xl">AI Bot</h1>
+          <h1 className="text-2xl font-semibold">AI Bot</h1>
         </div>
       </div>
 
-      {/* Messages */}
-      <div className="px-6 pt-24 pb-32 space-y-4 overflow-y-auto">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <GlassCard className={`chat-bubble ${message.sender === 'user' ? 'user-bubble' : 'bot-bubble'}`}>
-              <p className="text-sm">{message.text}</p>
-            </GlassCard>
-          </div>
-        ))}
+      {/* Messages Area */}
+      <div 
+        ref={scrollRef}
+        className="flex-1 px-6 pt-24 pb-32 overflow-y-auto space-y-6 scrollbar-hide"
+      >
+        <AnimatePresence initial={false}>
+          {messages.map((message) => (
+            <motion.div
+              key={message.id}
+              variants={bubbleVariants}
+              initial="initial"
+              animate={["animate", "float"]}
+              className={`flex items-end space-x-2 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {message.sender === 'bot' && (
+                <div className="w-8 h-8 rounded-full border-2 border-mint bg-mint/10 flex items-center justify-center flex-shrink-0 mb-1">
+                  <div className="w-4 h-4 rounded-full bg-mint shadow-[0_0_8px_rgba(190,231,211,0.5)]" />
+                </div>
+              )}
+              
+              <div className={`max-w-[80%] ${message.sender === 'user' ? 'order-1' : 'order-2'}`}>
+                <GlassCard 
+                  className={`p-4 rounded-3xl ${
+                    message.sender === 'user' 
+                      ? 'bg-gradient-to-r from-mint to-gold text-[#1A2822] shadow-lg shadow-mint/10' 
+                      : 'bg-white/5 border-white/10 text-white/90'
+                  }`}
+                >
+                  <p className="text-[15px] leading-relaxed">{message.text}</p>
+                </GlassCard>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
-      {/* Input Bar */}
-      <div className="fixed bottom-6 left-6 right-6">
-        <GlassCard className="px-4 py-3">
-          <div className="flex items-center space-x-3">
+      {/* Input Bar Section */}
+      <div className="fixed bottom-8 left-6 right-6 z-20">
+        <div className="flex items-center space-x-3">
+          <div className="flex-1 h-14 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl px-6 flex items-center shadow-lg">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Type a message..."
-              className="flex-1 bg-transparent outline-none placeholder:opacity-50"
+              className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-white/30 text-base"
             />
-            <button
-              onClick={handleSend}
-              className="icon-wrapper p-2"
-            >
-              <Send className="w-5 h-5" />
-            </button>
           </div>
-        </GlassCard>
+          <button
+            onClick={handleSend}
+            className="w-14 h-14 rounded-full bg-gradient-to-br from-mint to-gold flex items-center justify-center shadow-lg shadow-mint/20 active:scale-95 transition-all group"
+          >
+            <Send className="w-6 h-6 text-[#1A2822] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
+        </div>
       </div>
     </div>
   );
