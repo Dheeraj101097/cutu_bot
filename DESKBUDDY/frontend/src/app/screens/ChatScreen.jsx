@@ -60,11 +60,11 @@ export function ChatScreen() {
   };
 
   return (
-    <div className="screen-container overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,var(--bg-glow)_0%,var(--bg-base)_100%)] text-[var(--text-main)] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] overflow-hidden flex flex-col">
       {/* Header */}
       <div className="fixed top-0 left-0 right-0 z-20 px-6 pt-8 pb-4 backdrop-blur-xl">
         <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/home')} className="nav-icon">
+          <button onClick={() => navigate('/home')} className="p-2 opacity-60 hover:opacity-100 transition-opacity">
             <ArrowLeft className="w-6 h-6" />
           </button>
           <h1 className="text-2xl font-semibold">AI Bot</h1>
@@ -95,8 +95,8 @@ export function ChatScreen() {
                 <GlassCard 
                   className={`p-4 rounded-3xl ${
                     message.sender === 'user' 
-                      ? 'bg-gradient-to-r from-mint to-gold text-[#1A2822] shadow-lg shadow-mint/10' 
-                      : 'bg-white/5 border-white/10 text-white/90'
+                      ? 'bg-gradient-to-r from-[var(--mint)] to-[var(--gold)] text-[#1A2822] shadow-lg shadow-[var(--mint)]/10' 
+                      : 'bg-[var(--glass-bg)] border border-[var(--glass-border)] opacity-90'
                   }`}
                 >
                   <p className="text-[15px] leading-relaxed">{message.text}</p>
@@ -110,14 +110,14 @@ export function ChatScreen() {
       {/* Input Bar Section */}
       <div className="fixed bottom-8 left-6 right-6 z-20">
         <div className="flex items-center space-x-3">
-          <div className="flex-1 h-14 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl px-6 flex items-center shadow-lg">
+          <div className="flex-1 h-14 rounded-full bg-[var(--glass-bg)] border border-[var(--glass-border)] backdrop-blur-2xl px-6 flex items-center shadow-lg">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Type a message..."
-              className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-white/30 text-base"
+              className="flex-1 bg-transparent border-none outline-none text-[var(--text-main)] placeholder:text-[var(--text-main)] placeholder:opacity-30 text-base"
             />
           </div>
           <button

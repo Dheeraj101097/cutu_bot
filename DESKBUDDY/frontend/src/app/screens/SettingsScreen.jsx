@@ -180,19 +180,15 @@ export function SettingsScreen() {
   };
 
   return (
-    <div className="screen-container">
-      {/* Header */}
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,var(--bg-glow)_0%,var(--bg-base)_100%)] text-[var(--text-main)] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] overflow-x-hidden pt-24 pb-24">
       <div className="fixed top-0 left-0 right-0 z-10 px-6 pt-8 pb-4 backdrop-blur-xl">
         <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/home')} className="nav-icon">
-            <ArrowLeft className="w-6 h-6" />
-          </button>
-          <h1 className="text-2xl">Settings</h1>
+          <h1 className="text-2xl font-semibold">Settings</h1>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-6 pt-24 pb-8 space-y-6">
+      <div className="px-6 pt-2 pb-8 space-y-6">
         {/* Profile Info fetched from Google/Apple */}
         <GlassCard className="p-5">
           <div className="flex items-center space-x-4">

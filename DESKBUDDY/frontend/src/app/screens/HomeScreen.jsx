@@ -116,21 +116,15 @@ export function HomeScreen() {
     { icon: Music, label: 'Music', route: '/music' },
   ];
 
-  const navItems = [
-    { icon: Home, active: true },
-    { icon: Plus, active: false },
-    { icon: Bell, active: false },
-    { icon: User, active: false },
-  ];
 
   return (
-    <div className="screen-container">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_center,var(--bg-glow)_0%,var(--bg-base)_100%)] text-[var(--text-main)] font-['Inter',-apple-system,BlinkMacSystemFont,sans-serif] overflow-x-hidden">
       <div className="flex flex-col h-full px-6 pt-16 pb-24">
         {/* Header */}
         <div className="mb-8">
           {/* Dynamic Greeting */}
           <h1 className="text-4xl mb-2">Hi {firstName}</h1>
-          <p className="opacity-60">Welcome to your AI-Native OS</p>
+          <p className="text-[var(--gold)] opacity-80">Welcome to your AI-Native OS</p>
         </div>
 
         {/* Feature Grid */}
@@ -155,28 +149,6 @@ export function HomeScreen() {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-6 left-6 right-6">
-        <GlassCard className="px-8 py-4">
-          <div className="flex justify-between items-center">
-            {navItems.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={idx}
-                  className={`nav-icon ${item.active ? 'active' : ''}`}
-                  onClick={() => {
-                    if (idx === 0) navigate('/home'); // Home routing
-                    if (idx === 3) navigate('/settings'); // Settings routing
-                  }}
-                >
-                  <Icon className="w-6 h-6" />
-                </button>
-              );
-            })}
-          </div>
-        </GlassCard>
-      </div>
     </div>
   );
 }
