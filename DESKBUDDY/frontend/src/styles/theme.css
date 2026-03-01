@@ -191,25 +191,40 @@
   --bg-glow: #1A2822;
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(222, 237, 207, 0.2);
+  --text-main: #DEEDCF;
 }
 
 [data-theme="light"] {
-  --bg-base: #F8FAF9;
-  --bg-glow: #bee7d3;
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(222, 237, 207, 0.3);
+  --bg-base: #F5F9F7;
+  --bg-glow: #DEEDCF;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(222, 237, 207, 0.4);
+  --text-main: #05100B;
 }
+/* [data-theme="light"] {
+  --bg-base: #F5F9F7;
+  --bg-glow: #DEEDCF;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(222, 237, 207, 0.4);
+  --text-main: #05100B;
+} */
 
 .screen-container {
   min-height: 100vh;
   background: radial-gradient(ellipse at center, var(--bg-glow) 0%, var(--bg-base) 100%);
-  color: white;
+  color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
 }
 
+
+
 [data-theme="light"] .screen-container {
-  color: #1A2822;
+  color: #05100B;
+}
+
+.subheading {
+  color: var(--gold);
 }
 
 .glass-card {
@@ -312,7 +327,7 @@
 .nav-icon:hover,
 .nav-icon.active {
   opacity: 1;
-  color: var(--mint);
+  color: var(--gold);
 }
 
 .chat-bubble {
