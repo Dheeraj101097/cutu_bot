@@ -1,5 +1,12 @@
 {
   "appId": "com.dheeraj_1.app",
   "appName": "urbannook_test_1",
-  "webDir": "dist"
+  "webDir": "dist",
+  "plugins": {
+    "GoogleAuth": {
+      "scopes": ["profile", "email"],
+      "serverClientId": "930555871009-rureeib2honh3msv5mh6v7c29booffo9.apps.googleusercontent.com",
+      "forceCodeForRefreshToken": true
+    }
+  }
 }
